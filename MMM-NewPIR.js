@@ -24,7 +24,8 @@ Module.register("MMM-NewPIR", {
       pir: {
         usePir: true,
         gpio: 21,
-        reverseValue: false
+        reverseValue: false,
+        delayed: 0
       },
       governor: {
         useGovernor: false,
