@@ -76,6 +76,10 @@ this is the default configuration defined if you don't define any value
         LastPresenceText: "Last Presence:",
         useTouch: false
       },
+      touch: {
+        useTouch: false,
+        mode: 3
+      },
       pir: {
         usePir: true,
         gpio: 21,
@@ -105,7 +109,6 @@ this is the default configuration defined if you don't define any value
 | governorSleeping| Activate sleeping governor when screen is off | Boolean | false |
 | displayLastPresence| Display the date of the last user presence | Boolean | true |
 | LastPresenceText| Display this text near the last presence date | Text | Last Presence: |
-| useTouch| Allow to use TouchScreen or mouse (see TouchScreen Field below) | Boolean | false |
 
  * Available mode:
    - `mode: 1` - use vgencmd (RPI only)
@@ -115,6 +118,24 @@ this is the default configuration defined if you don't define any value
    - `mode: 5` - use dpms (linux version for debian, ubuntu, ...)
 
 Note: the mode 0 disable turnOffDisplay too
+
+### Field `touch: {}`
+| Option  | Description | Type | Default |
+| ------- | --- | --- | --- |
+| useTouch| Allow to use TouchScreen or mouse | Boolean | false |
+| mode| selected mode for enable/disable the screen with touch | Number | 3
+
+ * Available mode:
+   - `mode: 1`
+     - One click on the screen will restart the timer (or Wake up the screen if needed)
+     - Double Click on the screen will shutdown the screen
+   - `mode: 2`
+     - One Click on the NewPIR area will restart the timer
+     - Long Click on the screen will shutdown or wake up the screen (toogle)
+   - `mode: 3`
+     - One Click on the NewPIR area will restart the timer
+     - Doucle Click on the NewPIR area will shutdown the screen
+     - One Click on the screen will wake up if shutdown
 
 ### Field `pir: {}`
 | Option  | Description | Type | Default |
@@ -156,12 +177,6 @@ cd ~/MagicMirror/modules/MMM-NewPIR
 git pull
 npm run update
 ```
-
-## TouchScreen Feature
-You can use this feature with a mouse or your touch screen
-
- * One Click on the NewPIR Area: will restart your shutdown timer
- * Long Click on the screen: Will turn off your screen or Will turn on if needed (Toogle)
  
 ## Donate
  [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TTHRH94Y4KL36&source=url), if you love this module !

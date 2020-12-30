@@ -1,6 +1,7 @@
 #NEWPIR {
   font-size: large;
   /*display: flex;*/
+  user-select: none;
 }
 
 #NEWPIR.hidden {
