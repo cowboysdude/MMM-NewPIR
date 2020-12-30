@@ -18,8 +18,11 @@ Module.register("MMM-NewPIR", {
         displayStyle: "Text",
         governorSleeping: false,
         displayLastPresence: true,
-        LastPresenceText: "Last Presence:",
-        useTouch: false
+        LastPresenceText: "Last Presence:"
+      },
+      touch: {
+        useTouch: false,
+        mode: 3
       },
       pir: {
         usePir: true,
@@ -120,7 +123,7 @@ Module.register("MMM-NewPIR", {
     notificationReceived: function (notification, payload) {
       switch(notification) {
         case "DOM_OBJECTS_CREATED":
-          if (this.config.screen.useTouch) this.touchScreen()
+          if (this.config.touch.useTouch) this.touchScreen(this.config.touch.mode)
           this.prepareBar()
           break
         case "USER_PRESENCE":
@@ -250,23 +253,67 @@ Module.register("MMM-NewPIR", {
       mylog("Hide All modules.")
     },
 
-    touchScreen: function () {
+    touchScreen: function (mode) {
       let clickCount = 0
       let clickTimer = null
-
       let NewPIR = document.getElementById("NEWPIR")
-      NewPIR.addEventListener('click', () => {
-        if (clickCount) return clickCount = 0
-        if (!this.hidden) this.sendSocketNotification("WAKEUP")
-      }, false)
 
-      window.addEventListener('long-press', () => {
-        clickCount = 1
-        if (this.hidden) this.sendSocketNotification("WAKEUP")
-        else this.sendSocketNotification("FORCE_END")
-        clickTimer = setTimeout(() => { clickCount = 0 }, 400)
-      }, false)
+      switch (mode) {
+        case 1:
+          /** mode 1 **/
+          window.addEventListener('click', () => {
+            clickCount++
+            if (clickCount === 1) {
+              clickTimer = setTimeout(() => {
+                clickCount = 0
+                this.sendSocketNotification("WAKEUP")
+              }, 400)
+            } else if (clickCount === 2) {
+              clearTimeout(clickTimer)
+              clickCount = 0
+              this.sendSocketNotification("FORCE_END")
+            }
+          }, false)
+          break
+        case 2:
+          /** mode 2 **/
+          NewPIR.addEventListener('click', () => {
+            if (clickCount) return clickCount = 0
+            if (!this.hidden) this.sendSocketNotification("WAKEUP")
+          }, false)
 
-      mylog("Touch Screen Function added.")
+          window.addEventListener('long-press', () => {
+            clickCount = 1
+            if (this.hidden) this.sendSocketNotification("WAKEUP")
+            else this.sendSocketNotification("FORCE_END")
+            clickTimer = setTimeout(() => { clickCount = 0 }, 400)
+          }, false)
+          break
+        case 3:
+          /** mode 3 **/
+          NewPIR.addEventListener('click', () => {
+            clickCount++
+            if (clickCount === 1) {
+              clickTimer = setTimeout(() => {
+                clickCount = 0
+                this.sendSocketNotification("WAKEUP")
+              }, 400)
+            } else if (clickCount === 2) {
+              clearTimeout(clickTimer)
+              clickCount = 0
+              this.sendSocketNotification("FORCE_END")
+            }
+          }, false)
+
+          window.addEventListener('click', () => {
+            if (!this.hidden) return
+            clickCount = 3
+            this.sendSocketNotification("WAKEUP")
+            clickTimer = setTimeout(() => { clickCount = 0 }, 400)
+          }, false)
+          break
+      }
+      if (!mode) mylog("Touch Screen Function disabled.")
+      else mylog("Touch Screen Function added. [mode " + mode +"]")
     }
 });
