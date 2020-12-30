@@ -122,7 +122,7 @@ Note: the mode 0 disable turnOffDisplay too
 ### Field `touch: {}`
 | Option  | Description | Type | Default |
 | ------- | --- | --- | --- |
-| useTouch| Allow to use TouchScreen or mouse (see TouchScreen Field below) | Boolean | false |
+| useTouch| Allow to use TouchScreen or mouse | Boolean | false |
 | mode| selected mode for enable/disable the screen with touch | Number | 3
 
  * Available mode:
@@ -177,12 +177,6 @@ cd ~/MagicMirror/modules/MMM-NewPIR
 git pull
 npm run update
 ```
-
-## TouchScreen Feature
-You can use this feature with a mouse or your touch screen
-
- * One Click on the NewPIR Area: will restart your shutdown timer
- * Long Click on the screen: Will turn off your screen or Will turn on if needed (Toogle)
  
 ## Donate
  [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TTHRH94Y4KL36&source=url), if you love this module !
