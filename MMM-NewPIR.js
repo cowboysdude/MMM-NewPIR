@@ -18,7 +18,8 @@ Module.register("MMM-NewPIR", {
         displayStyle: "Text",
         governorSleeping: false,
         displayLastPresence: true,
-        LastPresenceText: "Last Presence:"
+        LastPresenceText: "Last Presence:",
+        delayed: 0
       },
       touch: {
         useTouch: false,
@@ -27,8 +28,7 @@ Module.register("MMM-NewPIR", {
       pir: {
         usePir: true,
         gpio: 21,
-        reverseValue: false,
-        delayed: 0
+        reverseValue: false
       },
       governor: {
         useGovernor: false,
