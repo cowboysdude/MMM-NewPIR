@@ -101,6 +101,10 @@ Module.register("MMM-NewPIR", {
           userPresence.textContent= this.userPresence
         }
         break
+      case "SCREEN_POWER":
+        if (payload) this.sendNotification("SCREEN_ON")
+        else this.sendNotification("SCREEN_OFF")
+        break
       case "NPM_UPDATE":
         console.log("yeah", payload)
         if (payload && payload.length > 0) {
