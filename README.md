@@ -166,6 +166,8 @@ Notes: On boot of your RPI, your governor is reset automaticaly to ondemand
 
 - This module broadcasts:
   * `USER_PRESENCE` notification with the payload beeing `true` or `false` you can use it to pause or disable another module.
+  * `SCREEN_ON` notification when your screen turn on.
+  * `SCREEN_OFF` notification when your screen turn off. 
 - This module receive:
   * `USER_PRESENCE` notification with the payload `true` to force user presence or `false` to force delay to time out. 
   * `SCREEN_END` notification to force the end of the count down
