@@ -74,7 +74,8 @@ this is the default configuration defined if you don't define any value
         governorSleeping: false,
         displayLastPresence: true,
         LastPresenceText: "Last Presence:",
-        useTouch: false
+        useTouch: false,
+        delayed: 0
       },
       touch: {
         useTouch: false,
@@ -109,6 +110,7 @@ this is the default configuration defined if you don't define any value
 | governorSleeping| Activate sleeping governor when screen is off | Boolean | false |
 | displayLastPresence| Display the date of the last user presence | Boolean | true |
 | LastPresenceText| Display this text near the last presence date | Text | Last Presence: |
+| delayed| Delayed turn on screen time (only if your screen is off). (in ms) | Number | 0
 
  * Available mode:
    - `mode: 1` - use vgencmd (RPI only)
@@ -177,11 +179,17 @@ cd ~/MagicMirror/modules/MMM-NewPIR
 git pull
 npm run update
 ```
+
+## Support and Helping
+New forum and support for all @bugsounet modules is now localized [there](http://forum.bugsounet.fr) !
  
 ## Donate
  [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TTHRH94Y4KL36&source=url), if you love this module !
 
 ## Change Log
+
+### 2020-12-31
+- Add Delayed starts screen feature
 
 ### 2020-12-29
 - Review Touch Screen Feature
