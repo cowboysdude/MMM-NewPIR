@@ -7,6 +7,10 @@ Module.register("MMM-NewPIR", {
     requiresVersion: "2.13.0",
     defaults: {
       debug: false,
+      notification: {
+        userPresence: true,
+        screenStatus: true
+      },
       screen: {
         delay: 2 * 60 * 1000,
         turnOffDisplay: true,
@@ -91,7 +95,7 @@ Module.register("MMM-NewPIR", {
         }
         break
       case "SCREEN_PRESENCE":
-        this.sendNotification("USER_PRESENCE", payload ? true : false)
+        if (this.config.notification.userPresence) this.sendNotification("USER_PRESENCE", payload ? true : false)
         if (payload) this.lastPresence = moment().format("LL HH:mm")
         else this.userPresence = this.lastPresence
         if (this.userPresence && this.config.screen.displayLastPresence) {
@@ -102,11 +106,12 @@ Module.register("MMM-NewPIR", {
         }
         break
       case "SCREEN_POWER":
-        if (payload) this.sendNotification("SCREEN_ON")
-        else this.sendNotification("SCREEN_OFF")
+        if (this.config.notification.screenStatus) {
+          if (payload) this.sendNotification("SCREEN_ON")
+          else this.sendNotification("SCREEN_OFF")
+        }
         break
       case "NPM_UPDATE":
-        console.log("yeah", payload)
         if (payload && payload.length > 0) {
           if (this.config.NPMCheck.useAlert) {
             payload.forEach(npm => {

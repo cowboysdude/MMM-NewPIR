@@ -65,7 +65,7 @@ module.exports = NodeHelper.create({
         if (payload && payload.length > 0) {
           if (this.config.NPMCheck.useAlert) {
             payload.forEach(npm => {
-              this.sendNotification("SHOW_ALERT", {
+              this.sendSocketNotification("SHOW_ALERT", {
                 type: "notification" ,
                 message: "[NPM] " + npm.library + " v" + npm.installed +" -> v" + npm.latest,
                 title: this.translate("UPDATE_NOTIFICATION_MODULE", { MODULE_NAME: npm.module }),
@@ -73,7 +73,7 @@ module.exports = NodeHelper.create({
               })
             })
           }
-          this.sendNotification("NPM_UPDATE", payload)
+          this.sendSocketNotification("NPM_UPDATE", payload)
         }
         break
     }
