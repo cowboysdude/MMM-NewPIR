@@ -53,7 +53,9 @@ To display the module insert it in the config.js file. Here is an example:
 },
 ```
 ## Personalized configuration
-this is the default configuration defined if you don't define any value
+ - This is the default configuration defined if you don't define any value.
+ - Don't copy/past the entire default config, just add in default config your needed new change value !
+ - all new value will automaticaly be merged with the default config
 
 ```js
 {
@@ -76,6 +78,10 @@ this is the default configuration defined if you don't define any value
         LastPresenceText: "Last Presence:",
         useTouch: false,
         delayed: 0
+      },
+      notification: {
+        userPresence: true,
+        screenStatus: true
       },
       touch: {
         useTouch: false,
@@ -120,6 +126,13 @@ this is the default configuration defined if you don't define any value
    - `mode: 5` - use dpms (linux version for debian, ubuntu, ...)
 
 Note: the mode 0 disable turnOffDisplay too
+
+### Field `notification: {}`
+
+| Option  | Description | Type | Default |
+| ------- | --- | --- | --- |
+| userPresence| broadcast the `USER_PRESENCE` status| Boolean| true |
+| screenStatus| broadcast the `SCREEN_ON` or `SCREEN_OFF` status| Boolean| true |
 
 ### Field `touch: {}`
 | Option  | Description | Type | Default |
@@ -189,6 +202,10 @@ New forum and support for all @bugsounet modules is now localized [there](http:/
  [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TTHRH94Y4KL36&source=url), if you love this module !
 
 ## Change Log
+
+### 2021-03-18
+- Correct npmcheck
+- Add notification feature
 
 ### 2020-12-31
 - Add Delayed starts screen feature
