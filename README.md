@@ -53,7 +53,9 @@ To display the module insert it in the config.js file. Here is an example:
 },
 ```
 ## Personalized configuration
-this is the default configuration defined if you don't define any value
+ - This is the default configuration defined if you don't define any value.
+ - Don't copy/past the entire default config, just add in default config your needed new change value !
+ - all new value will automaticaly be merged with the default config
 
 ```js
 {
