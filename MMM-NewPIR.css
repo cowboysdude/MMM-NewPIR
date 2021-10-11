@@ -2,6 +2,7 @@
   font-size: large;
   /*display: flex;*/
   user-select: none;
+  line-height: 99%; 
 }
 
 #NEWPIR.hidden {
