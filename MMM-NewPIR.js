@@ -84,7 +84,7 @@ Module.register("MMM-NewPIR", {
         }
         else if (this.config.screen.displayStyle != "Text") {
           let value = (100 - ((payload * 100) / this.config.screen.delay))/100
-          let timeOut = moment(new Date(this.config.screen.delay-payload)).format("mm:ss")
+          let timeOut = moment(new Date(this.config.screen.delay-payload)).format("m:ss")
           this.bar.animate(value, {
             step: (state, bar) => {
               bar.path.setAttribute('stroke', state.color)
@@ -96,11 +96,12 @@ Module.register("MMM-NewPIR", {
         break
       case "SCREEN_PRESENCE":
         if (this.config.notification.userPresence) this.sendNotification("USER_PRESENCE", payload ? true : false)
-        if (payload) this.lastPresence = moment().format("LL HH:mm")
+        if (payload) this.lastPresence = moment().format("LL H:mm")
         else this.userPresence = this.lastPresence
         if (this.userPresence && this.config.screen.displayLastPresence) {
           let presence= document.getElementById("NEWPIR_PRESENCE")
           presence.classList.remove("hidden")
+		  presence.classList.add("bright")
           let userPresence= document.getElementById("NEWPIR_PRESENCE_DATE")
           userPresence.textContent= this.userPresence
         }
@@ -166,10 +167,11 @@ Module.register("MMM-NewPIR", {
         var screenText = document.createElement("div")
         screenText.id = "NEWPIR_SCREEN_TEXT"
         screenText.textContent = this.config.screen.text
+		screenText.classList.add("bright")
         screen.appendChild(screenText)
         var screenCounter = document.createElement("div")
         screenCounter.id = "NEWPIR_SCREEN_COUNTER"
-        screenCounter.classList.add("counter")
+        screenCounter.classList.add("bright")
         screenCounter.textContent = "--:--"
         screen.appendChild(screenCounter)
 
